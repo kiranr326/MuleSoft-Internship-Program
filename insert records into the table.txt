@@ -1,0 +1,49 @@
+import java.sql.Connection;  
+import java.sql.DriverManager;  
+import java.sql.PreparedStatement;  
+import java.sql.SQLException;  
+   
+public class InsertRecords {  
+   
+    private Connection connect() {  
+     
+        String url = "jdbc:sqlite:C://sqlite/Movies.db";  
+        Connection conn = null;  
+        try {  
+            conn = DriverManager.getConnection(url);  
+        } catch (SQLException e) {  
+            System.out.println(e.getMessage());  
+        }  
+        return conn;  
+    }  
+   
+  
+    public void insert(String name, double capacity) {  
+        String sql = "INSERT INTO Movies(movie name,lead actor name,actress name,year of release,director name) VALUES(?,?)";  
+   
+        try{  
+            Connection conn = this.connect();  
+            PreparedStatement pstmt = conn.prepareStatement(sql);  
+            pstmt.setString(1, movie name);  
+            pstmt.setString(2, lead actor name);  
+            pstmt.setString(3,actress name);  
+            pstmt.setInt(4, year of release);  
+            pstmt.setString(5, director name);  
+            pstmt.executeUpdate();  
+        } catch (SQLException e) {  
+            System.out.println(e.getMessage());  
+        }  
+    }  
+   
+    public static void main(String[] args) {  
+   
+        InsertRecords app = new InsertRecords(); 
+        app.insert(1,'hridayam', 'Pranav Mohanlal', 'Kalyani Priyadarshan',2022,'Vineeth Sreenivasan');
+        app.insert(2,'Fanaa', 'Aamir Khan', 'Kajol',2006,'Kunal Kohli');
+        app.insert (3,'Helen', 'Lal', 'Anna Ben',2019,'Mathukutty Xavier');
+        app.insert(4,'kumbalangi nights', 'Shane Nigam', 'Anna Ben',2019,' Madhu C. Narayanan');
+        app.insert(5,'drishyam', 'Mohanlal', 'Meena',2013,'Jeethu Joseph');
+          
+    }  
+   
+}  
